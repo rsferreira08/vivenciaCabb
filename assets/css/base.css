@@ -1,0 +1,95 @@
+		* {
+			font-family: "Raleway";
+		}
+		html,body {
+			border: 0px;
+			padding: 0px;
+			min-height: 100%;
+		}
+		.home-background {
+			position: relative;
+			background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url(../img/contactCenter.jpg);
+   			background-size: cover;
+    		background-position: center;
+    		background-attachment: fixed;
+    		padding: 0;
+    		height: 100vh;
+   			min-height: 35rem;
+		}
+		#navbar-main {
+			padding: 1.5rem 0;
+		}
+		#navbar-main .nav-link {
+			font-size: 1rem;
+			padding: 1rem;
+			color: #fff;
+		}
+		#navbar-main .nav-link:hover {
+			color: rgba(255,255,255,0.75);
+		}
+		.vivenciaLogo {
+			height: 150px;
+		}
+
+		.home-scroll {
+			position: absolute;
+		    bottom: 1rem;
+		    left: 0;
+		    width: 100%;
+		    text-align: center;
+		}
+
+		.home-scroll-btn {
+			display: inline-block;
+		    font-size: 1.5rem;
+		    height: 3.125rem;
+		    width: 3.125rem;
+		    line-height: 3.125rem;
+		    border-radius: 100%;
+		    border: 0.125rem;
+		    border-style: solid;
+		    border-color: #fff;
+		    cursor: pointer;
+		    -webkit-transition: all 0.15s ease-in-out;
+		    transition: all 0.15s ease-in-out;
+		    color: #fff;
+		}
+		.home-scroll .home-scroll-btn:hover {
+			-webkit-transform: translateY(-0.25rem);
+		  	transform: translateY(-0.25rem);
+		  	border-color: rgba(255, 255, 255, 0.5);
+		  	color: rgba(255, 255, 255, 0.5);
+		}
+		.img-guia {
+			padding: 1.5rem;
+		}
+		.scrolled {
+			background-color: #265aab;
+			padding: 0rem !important;
+			
+		}
+		.scrolled a {
+			color: #ffd64b !important;
+		}
+		.scrolled a:hover {
+			color: rgba(255, 214, 75,0.75) !important;
+
+		}
+		.box-roteiro img {
+			cursor: pointer;
+		}
+		.box-roteiro img:hover {
+			
+			height: 50% !important;
+		}
+		footer {
+			background-color: rgb(38,90,171);
+		}
+
+		.active {
+			font-weight: 700;
+    		border-bottom: 5px solid #ffd64b;
+		}
+		#calendario a:hover {
+			text-decoration: none;
+		}
