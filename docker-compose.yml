@@ -1,0 +1,21 @@
+version: '3'
+services:
+  back-end:
+    build: .
+    ports:
+      - 80:80
+    volumes:
+      - ./:/var/www/html
+    links:
+      - mariadb
+
+  mariadb:
+    image: mariadb:10.1.36
+    environment:
+      MYSQL_DATABASE: db_vivencia
+      MYSQL_USER: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - 3306:3306
+    volumes:
+      - ./vivencia.sql:/docker-entrypoint-initdb.d/vivencia.sql
