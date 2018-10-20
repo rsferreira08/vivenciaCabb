@@ -18,7 +18,7 @@ if (!$isValid) {
 $turmaArray = Agenda::pesquisaPorData(strtotime($dataHora));
 ?>
 
-<div class="event-info""> 
+<div class="event-info"> 
     <h1 style="padding: 20px;">Inscritos</h1> 
     <div class="row"> 
         <div class="col-lg-6"> 
