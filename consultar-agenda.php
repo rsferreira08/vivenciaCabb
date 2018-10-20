@@ -2,11 +2,23 @@
 // carrega arquivo de configuração
 require_once('config/config.php');
 
-$turmaArray = Agenda::pesquisaPorData(strtotime('26-10-2018 13:30'));
+$dataHora = str_replace('--', ' ', $_GET['data']);
 
+$possiveisDataHora = Agenda::getDatasValidas();
+
+$isValid = in_array($dataHora, $possiveisDataHora);
+
+if (!$isValid) {
+	// TODO: Exception Logic.
+	// TBI: Throw exception or redirect to index?
+	echo 'Invalid datetime';
+	die();
+}
+
+$turmaArray = Agenda::pesquisaPorData(strtotime($dataHora));
 ?>
 
-<div class="event-info"">
+<div class="event-info">
 	<h1 style="padding: 20px;">Inscritos</h1>
 	<div class="row">
 		<div class="col-lg-5">

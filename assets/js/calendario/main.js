@@ -115,8 +115,11 @@ jQuery(document).ready(function($){
 		this.modalHeader.find('.event-date').text(event.find('.event-date').text());
 		this.modal.attr('data-event', event.parent().attr('data-event'));
 
+		// we cannot use space on query string
+		const data = event.parent().attr('data-content').replace(' ', '--');
+
 		//update event content
-		this.modalBody.find('.event-info').load(event.parent().attr('data-content')+'.php .event-info > *', function(data){
+		this.modalBody.find('.event-info').load(`consultar-agenda.php?data=${data} .event-info > *`, function(data){
 			//once the event content has been loaded
 			self.element.addClass('content-loaded');
 		});
