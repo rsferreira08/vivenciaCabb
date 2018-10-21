@@ -1,6 +1,11 @@
 <?php
 // carrega arquivo de configuração
 require_once('config/config.php');
+
+$compromissos = Agenda::pesquisaTodosCompromissos();
+$compromissosPorEvento = Agenda::formataCompromissosPorEvento($compromissos);
+$eventos = Agenda::getDatasPorDateCode('z');
+$segundaFeirasValidas = Agenda::getSegundasValidas();
 ?>
 
 <!DOCTYPE html>
@@ -119,6 +124,90 @@ require_once('config/config.php');
 			}, 'json');
 		});
 	</script>
-	
+	<script>
+		(function() {
+			function updateCalendar(selectedMonday) {
+				var events = <?php echo json_encode($eventos) ?>;
+				var whitelist = Object.keys(<?php echo json_encode($segundaFeirasValidas) ?>);
+				var meetingPerEvent = <?php echo json_encode($compromissosPorEvento) ?>;
+
+				if (whitelist.indexOf(selectedMonday) === -1) {
+					return;
+				}
+
+				var eventGroups = [
+					document.getElementById('mon'),
+					document.getElementById('tue'),
+					document.getElementById('wed'),
+					document.getElementById('thurs'),
+					document.getElementById('fri')
+				];			
+				
+				var diaSelectHtml = '<option value="">Selecione...</option>';
+
+				for (var i = 0; i < 5; i++) {
+					var eventsOfTheDay = events[(selectedMonday|0) + i];
+
+					var currentEventGroup = eventGroups[i];
+					if (eventsOfTheDay == null) {
+						$(currentEventGroup).find('span').text('');
+						$(currentEventGroup).find('ul').html('');
+						continue;
+					}
+
+
+					eventsOfTheDay = eventsOfTheDay.sort(function(a , b) {
+						return a.split(' ')[1].split(':')[0] - b.split(' ')[1].split(':')[0];
+					});
+									
+					var dayMonthYear = eventsOfTheDay[0].split(' ')[0].split('-');
+					var displayDate = dayMonthYear[0] + '/' + dayMonthYear[1];
+					
+					diaSelectHtml += `<option value=${dayMonthYear}>${displayDate}</option>`;
+					var ulHtml = '';
+
+					eventsOfTheDay.forEach(function(currentEvent, index) {
+						var dateTimeArray = currentEvent.split(' ');
+						var date = dateTimeArray[0];
+						var time = dateTimeArray[1];
+						var dayMonthYear = date.split('-');
+						var startTime = time;
+						var splitStartTime = startTime.split(':');
+						var endTime = ((splitStartTime[0] | 0) + 1) + ':' + splitStartTime[1];
+
+						ulHtml += `
+							<li class="single-event" data-start="${startTime}" data-end="${endTime}" data-content="${currentEvent}" data-event="event-${index + 1}">
+								<a href="#0">
+									<em class="event-name">
+									${meetingPerEvent[currentEvent] != null
+										? meetingPerEvent[currentEvent].reduce(function(acc, cur) {
+												return acc + `<img alt="${cur['matricula']}" src="assets/img/avatar.png" class="rounded-circle" width="20px;">`
+											}, '')
+										: ''
+									}
+									</em>
+								</a>
+							</li>`;
+					});
+
+					$('#dia').html(diaSelectHtml);
+					$(currentEventGroup).find('span').text(displayDate);
+					$(currentEventGroup).find('ul').html(ulHtml);
+				}
+			}
+
+			var semanaPicker = document.getElementById('semana');
+			
+			if (semanaPicker) {
+				updateCalendar(semanaPicker.options[semanaPicker.selectedIndex].value);
+				semanaPicker.addEventListener('change', function() {
+					updateCalendar(semanaPicker.options[semanaPicker.selectedIndex].value);
+					if (typeof window.__refreshCalendar === 'function') {
+						window.__refreshCalendar();
+					}
+				});
+			}
+		})();
+	</script>
 </body>
 </html>
