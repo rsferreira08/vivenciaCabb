@@ -106,16 +106,36 @@ class Agenda {
 	}
 
 	public static function getDatasValidas() {
-		// TODO: Refactor to a database query
-		$diasValidos = Array('22', '23', '24', '25', '26');
-		$horariosValidos = Array('15:00', '13:30', '11:15', '10:00');
+		$diasValidosPorMesAno = Array(
+			'10-2018' => Array(
+				'start' => 22,
+				'finish' => 31,
+				'notInclude' => Array()
+			),
+			'11-2018' => Array(
+				'start' => 1,
+				'finish' => 30,
+				'notInclude' => Array()
+			),
+			'12-2018' => Array(
+				'start' => 1,
+				'finish' => 31,
+				'notInclude' => Array(5)
+			),
+		);
 
-		// $dataTemplate = '$dia-10-2018 $hora'; php nao tem suporte pra string template?
+		$horariosValidos = Array('15:00', '13:30', '11:15', '10:00');
 		$possiveisDataHora = Array();
 
-		foreach ($diasValidos as $dia) {
-			foreach ($horariosValidos as $horario) {
-				array_push($possiveisDataHora, $dia.'-10-2018 '.$horario);
+		foreach ($diasValidosPorMesAno as $mesAno => $mesAnoData) {
+			for ($dia = $mesAnoData['start']; $dia <= $mesAnoData['finish']; $dia++) {
+				if (in_array($dia, $mesAnoData['notInclude'])) {
+					continue;
+				}
+				
+				foreach ($horariosValidos as $horario) {
+					array_push($possiveisDataHora, $dia.'-'.$mesAno.' '.$horario);
+				}
 			}
 		}
 
