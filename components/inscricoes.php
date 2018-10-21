@@ -1,3 +1,43 @@
+<?php
+// TODO: WIP
+// $compromissos = Agenda::pesquisaTodosCompromissos();
+
+// TODO: Adicionar eventos no banco
+// $eventos = Agenda::getDatasValidas();
+// $numeroDeEventos = count($eventos);
+// $numeroTipoDeEventos = 4;
+
+// dia 22
+$dia22turma1 = Agenda::pesquisaPorData(strtotime('22-10-2018 10:00'));
+$dia22turma2 = Agenda::pesquisaPorData(strtotime('22-10-2018 11:15'));
+$dia22turma3 = Agenda::pesquisaPorData(strtotime('22-10-2018 13:30'));
+$dia22turma4 = Agenda::pesquisaPorData(strtotime('22-10-2018 15:00'));
+
+// dia 23
+$dia23turma1 = Agenda::pesquisaPorData(strtotime('23-10-2018 10:00'));
+$dia23turma2 = Agenda::pesquisaPorData(strtotime('23-10-2018 11:15'));
+$dia23turma3 = Agenda::pesquisaPorData(strtotime('23-10-2018 13:30'));
+$dia23turma4 = Agenda::pesquisaPorData(strtotime('23-10-2018 15:00'));
+
+// dia 24
+$dia24turma1 = Agenda::pesquisaPorData(strtotime('24-10-2018 10:00'));
+$dia24turma2 = Agenda::pesquisaPorData(strtotime('24-10-2018 11:15'));
+$dia24turma3 = Agenda::pesquisaPorData(strtotime('24-10-2018 13:30'));
+$dia24turma4 = Agenda::pesquisaPorData(strtotime('24-10-2018 15:00'));
+
+// dia 25
+$dia25turma1 = Agenda::pesquisaPorData(strtotime('25-10-2018 10:00'));
+$dia25turma2 = Agenda::pesquisaPorData(strtotime('25-10-2018 11:15'));
+$dia25turma3 = Agenda::pesquisaPorData(strtotime('25-10-2018 13:30'));
+$dia25turma4 = Agenda::pesquisaPorData(strtotime('25-10-2018 15:00'));
+
+// dia 26
+$dia26turma1 = Agenda::pesquisaPorData(strtotime('26-10-2018 10:00'));
+$dia26turma2 = Agenda::pesquisaPorData(strtotime('26-10-2018 11:15'));
+$dia26turma3 = Agenda::pesquisaPorData(strtotime('26-10-2018 13:30'));
+$dia26turma4 = Agenda::pesquisaPorData(strtotime('26-10-2018 15:00'));
+?>
+
 <section class="mt-6 mb-3" id="inscricoes">
   <div class="container">
     <div class="row">
