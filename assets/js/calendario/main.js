@@ -35,6 +35,10 @@ jQuery(document).ready(function($){
 
 	SchedulePlan.prototype.dispose = function() {
 		this.element.removeClass('js-full');
+		$(this).off();
+		this.modal.off();
+		this.element.off();
+
 		this.element = null;
 		this.timeline = null;
 		this.timelineItems = null;
