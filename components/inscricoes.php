@@ -1,43 +1,3 @@
-<?php
-// TODO: WIP
-// $compromissos = Agenda::pesquisaTodosCompromissos();
-
-// TODO: Adicionar eventos no banco
-// $eventos = Agenda::getDatasValidas();
-// $numeroDeEventos = count($eventos);
-// $numeroTipoDeEventos = 4;
-
-// dia 22
-$dia22turma1 = Agenda::pesquisaPorData(strtotime('22-10-2018 10:00'));
-$dia22turma2 = Agenda::pesquisaPorData(strtotime('22-10-2018 11:15'));
-$dia22turma3 = Agenda::pesquisaPorData(strtotime('22-10-2018 13:30'));
-$dia22turma4 = Agenda::pesquisaPorData(strtotime('22-10-2018 15:00'));
-
-// dia 23
-$dia23turma1 = Agenda::pesquisaPorData(strtotime('23-10-2018 10:00'));
-$dia23turma2 = Agenda::pesquisaPorData(strtotime('23-10-2018 11:15'));
-$dia23turma3 = Agenda::pesquisaPorData(strtotime('23-10-2018 13:30'));
-$dia23turma4 = Agenda::pesquisaPorData(strtotime('23-10-2018 15:00'));
-
-// dia 24
-$dia24turma1 = Agenda::pesquisaPorData(strtotime('24-10-2018 10:00'));
-$dia24turma2 = Agenda::pesquisaPorData(strtotime('24-10-2018 11:15'));
-$dia24turma3 = Agenda::pesquisaPorData(strtotime('24-10-2018 13:30'));
-$dia24turma4 = Agenda::pesquisaPorData(strtotime('24-10-2018 15:00'));
-
-// dia 25
-$dia25turma1 = Agenda::pesquisaPorData(strtotime('25-10-2018 10:00'));
-$dia25turma2 = Agenda::pesquisaPorData(strtotime('25-10-2018 11:15'));
-$dia25turma3 = Agenda::pesquisaPorData(strtotime('25-10-2018 13:30'));
-$dia25turma4 = Agenda::pesquisaPorData(strtotime('25-10-2018 15:00'));
-
-// dia 26
-$dia26turma1 = Agenda::pesquisaPorData(strtotime('26-10-2018 10:00'));
-$dia26turma2 = Agenda::pesquisaPorData(strtotime('26-10-2018 11:15'));
-$dia26turma3 = Agenda::pesquisaPorData(strtotime('26-10-2018 13:30'));
-$dia26turma4 = Agenda::pesquisaPorData(strtotime('26-10-2018 15:00'));
-?>
-
 <section class="mt-6 mb-3" id="inscricoes">
   <div class="container">
     <div class="row">
@@ -51,16 +11,21 @@ $dia26turma4 = Agenda::pesquisaPorData(strtotime('26-10-2018 15:00'));
     <div class="row">
       <div class="offset-lg-3 col-lg-7">
         <form  class="form-inline">
+          <label class="my-1 mr-3" for="semana">Selecione a Semana</label>
+          <select class="custom-select my-1 mr-sm-1" id="semana" required>
+              <?php
+                // $segundaFeirasValidas vem de index.php
+                foreach ($segundaFeirasValidas as $diaDoAno => $data) {
+                  $diaMesAno = explode('-', explode(' ', $data)['0']);
+                  echo '<option value="'. $diaDoAno. '"> Semana do Dia '.$diaMesAno[0].'/'.$diaMesAno[1].' </options>';
+                }
+              ?>
+          </select>
+          
           <label class="my-1 mr-2" for="dia">Selecione o dia</label>
           <select class="custom-select my-1 mr-sm-2" id="dia" required>
               <option value="">Selecione...</option>
-              <option value="18-10-2018">18/10</option>
-              <option value="22-10-2018">22/10</option>
-              <option value="23-10-2018">23/10</option>
-              <option value="24-10-2018">24/10</option>
-              <option value="25-10-2018">25/10</option>
-              <option value="26-10-2018">26/10</option>
-          </select>	
+          </select>
 
           <label class="my-1 mr-2" for="hora">e a hora</label>
           <select class="custom-select my-1 mr-sm-2" id="turma" required> 
@@ -138,248 +103,41 @@ $dia26turma4 = Agenda::pesquisaPorData(strtotime('26-10-2018 15:00'));
             </ul>
           </div> <!-- .timeline -->
 
+          <!-- js -->
           <div class="events">
             <ul>
-            <?php
-              // TODO: Finish generic
-              /* for ($i = 0; $i < floor($numeroDeEventos / $numeroTipoDeEventos); $i++) {
-                echo '<li class="events-group">';
-                foreach ()
-
-                echo '</li>';
-              } */
-            ?>
-              <li class="events-group">
-                <div class="top-info"><span>22/10</span></div>
-
+              <li class="events-group" id="mon">
+                <div class="top-info"><span></span></div>
                 <ul>
-                  <li class="single-event" data-start="10:00" data-end="11:00" data-content="22-10-2018 10:00" data-event="event-1">
-                    <a href="#0">
-                      <em class="event-name mt-3">
-                        <?php foreach ( $dia22turma1 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
-
-                  <li class="single-event" data-start="11:15" data-end="12:15" data-content="22-10-2018 11:15" data-event="event-2">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia22turma2 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
-
-                  <li class="single-event" data-start="13:30" data-end="14:30"  data-content="22-10-2018 13:30" data-event="event-3">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia22turma3 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
-
-                  <li class="single-event" data-start="15:00" data-end="16:00"  data-content="22-10-2018 15:00" data-event="event-4">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia22turma4 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
                 </ul>
               </li>
 
-              <li class="events-group">
-                <div class="top-info"><span>23/10</span></div>
-
+              <li class="events-group" id="tue">
+                <div class="top-info"><span></span></div>
                 <ul>
-                  <li class="single-event" data-start="10:00" data-end="11:00" data-content="23-10-2018 10:00" data-event="event-1">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia23turma1 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
-
-                  <li class="single-event" data-start="11:15" data-end="12:15" data-content="23-10-2018 11:15" data-event="event-2">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia23turma2 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
-
-                  <li class="single-event" data-start="13:30" data-end="14:30"  data-content="23-10-2018 13:30" data-event="event-3">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia23turma3 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
-
-                  <li class="single-event" data-start="15:00" data-end="16:00"  data-content="23-10-2018 15:00" data-event="event-4">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia23turma4 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
                 </ul>
               </li>
 
-              <li class="events-group">
-                <div class="top-info"><span>24/10</span></div>
-
+              <li class="events-group" id="wed">
+                <div class="top-info"><span></span></div>
                 <ul>
-                  <li class="single-event" data-start="10:00" data-end="11:00" data-content="24-10-2018 10:00" data-event="event-1">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia24turma1 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
-
-                  <li class="single-event" data-start="11:15" data-end="12:15" data-content="24-10-2018 11:15" data-event="event-2">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia24turma2 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
-
-                  <li class="single-event" data-start="13:30" data-end="14:30"  data-content="24-10-2018 13:30" data-event="event-3">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia24turma3 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
-
-                  <li class="single-event" data-start="15:00" data-end="16:00"  data-content="24-10-2018 15:00" data-event="event-4">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia24turma4 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
                 </ul>
               </li>
 
-              <li class="events-group">
-                <div class="top-info"><span>25/10</span></div>
-
+              <li class="events-group" id="thurs">
+                <div class="top-info"><span></span></div>
                 <ul>
-                  <li class="single-event" data-start="10:00" data-end="11:00" data-content="25-10-2018 10:00" data-event="event-1">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia25turma1 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
-
-                  <li class="single-event" data-start="11:15" data-end="12:15" data-content="25-10-2018 11:15" data-event="event-2">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia25turma2 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
-
-                  <li class="single-event" data-start="13:30" data-end="14:30"  data-content="25-10-2018 13:30" data-event="event-3">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia25turma3 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
-
-                  <li class="single-event" data-start="15:00" data-end="16:00"  data-content="25-10-2018 15:00" data-event="event-4">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia25turma4 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
                 </ul>
               </li>
 
-              <li class="events-group">
-                <div class="top-info"><span>26/10</span></div>
-
+              <li class="events-group" id="fri">
+                <div class="top-info"><span></span></div>
                 <ul>
-                  <li class="single-event" data-start="10:00" data-end="11:00" data-content="26-10-2018 10:00" data-event="event-1">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia26turma1 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
-
-                  <li class="single-event" data-start="11:15" data-end="12:15" data-content="26-10-2018 11:15" data-event="event-2">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia26turma2 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
-
-                  <li class="single-event" data-start="13:30" data-end="14:30"  data-content="26-10-2018 13:30" data-event="event-3">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia26turma3 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
-
-                  <li class="single-event" data-start="15:00" data-end="16:00"  data-content="26-10-2018 15:00" data-event="event-4">
-                    <a href="#0">
-                      <em class="event-name">
-                        <?php foreach ( $dia26turma4 as $turma ) { ?>
-                        <img alt="<?=$turma['matricula']?>" src="assets/img/avatar.png" class="rounded-circle" width="20px;">
-                        <?php } ?>
-                      </em>
-                    </a>
-                  </li>
                 </ul>
               </li>
             </ul>
           </div>
+          <!-- fim js -->
 
           <div class="event-modal">
             <header class="header">

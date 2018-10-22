@@ -33,6 +33,35 @@ jQuery(document).ready(function($){
 		this.initSchedule();
 	}
 
+	SchedulePlan.prototype.dispose = function() {
+		this.element.removeClass('js-full');
+		$(this).off();
+		this.modal.off();
+		this.element.off();
+
+		this.element = null;
+		this.timeline = null;
+		this.timelineItems = null;
+		this.timelineItemsNumber = null;
+		this.timelineStart = null;
+		this.timelineUnitDuration = null;
+
+		this.eventsWrapper = null;
+		this.eventsGroup = null;
+		this.singleEvents = null;
+		this.eventSlotHeight = null;
+
+		this.modal = null;
+		this.modalHeader = null;
+		this.modalHeaderBg = null;
+		this.modalBody = null;
+		this.modalBodyBg = null;
+		this.modalMaxWidth = null;
+		this.modalMaxHeight = null;
+
+		this.animating = null;
+	}
+
 	SchedulePlan.prototype.initSchedule = function() {
 		this.scheduleReset();
 		this.initEvents();
@@ -331,16 +360,8 @@ jQuery(document).ready(function($){
 		}
 	};
 
-	var schedules = $('.cd-schedule');
 	var objSchedulesPlan = [],
 		windowResize = false;
-	
-	if( schedules.length > 0 ) {
-		schedules.each(function(){
-			//create SchedulePlan objects
-			objSchedulesPlan.push(new SchedulePlan($(this)));
-		});
-	}
 
 	$(window).on('resize', function(){
 		if( !windowResize ) {
@@ -381,4 +402,22 @@ jQuery(document).ready(function($){
 			'transform': value
 		});
 	}
+
+	window.__refreshCalendar = function() {
+		objSchedulesPlan.forEach(function(objSchedulePlan) {
+			objSchedulePlan.dispose();
+		});
+		
+		objSchedulesPlan = [];
+		var schedules = $('.cd-schedule');
+
+		if (schedules.length > 0) {
+			schedules.each(function () {
+				//create SchedulePlan objects
+				objSchedulesPlan.push(new SchedulePlan($(this)));
+			});
+		}
+	}
+
+	window.__refreshCalendar();
 });
